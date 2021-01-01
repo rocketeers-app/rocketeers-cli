@@ -2,8 +2,8 @@
 
 namespace App\Commands;
 
-use Spatie\Ssh\Ssh;
 use Illuminate\Console\Command;
+use Spatie\Ssh\Ssh;
 use Symfony\Component\Process\Process;
 
 class TailLog extends Command
@@ -23,7 +23,7 @@ class TailLog extends Command
             $this->output->write($line);
         })
         ->execute([
-            "tail -f /var/www/{$site}/current/storage/logs/laravel.log",
+            'tail -f /var/www/{$site}/current/storage/logs/laravel.log',
         ]);
     }
 }
