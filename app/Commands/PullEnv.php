@@ -2,8 +2,8 @@
 
 namespace App\Commands;
 
-use Spatie\Ssh\Ssh;
 use Illuminate\Console\Command;
+use Spatie\Ssh\Ssh;
 
 class PullEnv extends Command
 {
@@ -16,8 +16,6 @@ class PullEnv extends Command
 
         $process = Ssh::create('rocketeer', $site)
             ->execute("cat /var/www/{$site}/.env");
-
-        $process->run();
 
         echo $process->getOutput();
     }
