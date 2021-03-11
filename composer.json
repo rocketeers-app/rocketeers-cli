@@ -5,19 +5,10 @@
     "homepage": "https://laravel-zero.com",
     "type": "project",
     "license": "MIT",
-    "support": {
-        "issues": "https://github.com/laravel-zero/laravel-zero/issues",
-        "source": "https://github.com/laravel-zero/laravel-zero"
-    },
-    "authors": [
-        {
-            "name": "Nuno Maduro",
-            "email": "enunomaduro@gmail.com"
-        }
-    ],
     "require": {
         "php": "^7.4",
         "laravel-zero/framework": "^8.0",
+        "lorisleiva/laravel-actions": "^2.0",
         "spatie/ssh": "^1.4",
         "symfony/process": "^5.0"
     },
