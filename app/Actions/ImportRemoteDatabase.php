@@ -12,6 +12,15 @@ class ImportRemoteDatabase
 
     public function handle($site, $server = null)
     {
+        $name = (new GetRepositoryName)($site, $server);
+
+        $process = Ssh::create('rocketeer', $server)
+            ->execute([
+                'grep DB_DATABASE /var/www/'.$site."/current/.env | grep -v -e '^\s*#' | cut -d '=' -f 2-",
+            ]);
+
+        $database = trim($process->getOutput());
+
         $process = Ssh::create('rocketeer', $server)
             ->execute([
                 'grep DB_USERNAME /var/www/'.$site."/current/.env | grep -v -e '^\s*#' | cut -d '=' -f 2-",
@@ -26,10 +35,10 @@ class ImportRemoteDatabase
 
         $password = trim($process->getOutput());
 
-        $process = Process::fromShellCommandline("mysql -u root --password='' -e 'CREATE DATABASE IF NOT EXISTS `'".$site."'` CHARACTER SET utf8 COLLATE utf8_general_ci'");
+        $process = Process::fromShellCommandline("mysql -u root --password='' -e 'CREATE DATABASE IF NOT EXISTS `'".$database."'` CHARACTER SET utf8 COLLATE utf8_general_ci'");
         $process->run();
 
-        $process = Process::fromShellCommandline('ssh rocketeer@'.$server.' "sudo mysqldump --user=\''.$username.'\' --password=\''.$password.'\' --no-tablespaces \''.$site.'\' | sudo gzip" | gunzip | mysql -u root --password=\'\' \''.$site.'\'');
+        $process = Process::fromShellCommandline('ssh rocketeer@'.$server.' "sudo mysqldump --user=\''.$username.'\' --password=\''.$password.'\' --no-tablespaces \''.$database.'\' | sudo gzip" | gunzip | mysql -u root --password=\'\' \''.$name.'\'');
         $process->run();
     }
 }
