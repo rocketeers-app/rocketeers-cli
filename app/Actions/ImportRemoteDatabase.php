@@ -35,7 +35,7 @@ class ImportRemoteDatabase
 
         $password = trim($process->getOutput());
 
-        $process = Process::fromShellCommandline("mysql -u root --password='' -e 'CREATE DATABASE IF NOT EXISTS `'".$database."'` CHARACTER SET utf8 COLLATE utf8_general_ci'");
+        $process = Process::fromShellCommandline("mysql -u root --password='' -e 'CREATE DATABASE IF NOT EXISTS `'".$name."'` CHARACTER SET utf8 COLLATE utf8_general_ci'");
         $process->run();
 
         $process = Process::fromShellCommandline('ssh rocketeer@'.$server.' "sudo mysqldump --user=\''.$username.'\' --password=\''.$password.'\' --no-tablespaces \''.$database.'\' | sudo gzip" | gunzip | mysql -u root --password=\'\' \''.$name.'\'');
