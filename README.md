@@ -1,4 +1,4 @@
 # Rocket: Command Line Interface for Rocketeers
 ```bash
-composer require rocketeers-app/rocket
+composer global require rocketeers-app/rocket
 ```
