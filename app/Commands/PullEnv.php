@@ -7,8 +7,8 @@ use Illuminate\Console\Command;
 
 class PullEnv extends Command
 {
-    protected $signature = 'env:pull {site} {--server=}';
-    protected $description = 'Pull env file';
+    protected $signature = 'tail:log {site} {--server=}';
+    protected $description = 'Tail logs from sites';
 
     public function handle()
     {

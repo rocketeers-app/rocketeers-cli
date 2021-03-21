@@ -16,14 +16,14 @@ class TailLog extends Command
         $site = $this->argument('site');
 
         $process = Ssh::create('rocketeer', $site)
-        ->configureProcess(fn (Process $process) => $process->setTty(true))
-        ->onOutput(function ($type, $line) {
-            $this->handleClearOption();
+            ->configureProcess(fn (Process $process) => $process->setTty(true))
+            ->onOutput(function ($type, $line) {
+                $this->handleClearOption();
 
-            $this->output->write($line);
-        })
-        ->execute([
-            'tail -f /var/www/{$site}/current/storage/logs/laravel.log',
-        ]);
+                $this->output->write($line);
+            })
+            ->execute([
+                'tail -f /var/www/{$site}/current/storage/logs/laravel.log',
+            ]);
     }
 }
