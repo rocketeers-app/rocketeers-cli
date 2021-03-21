@@ -55,5 +55,7 @@ class Install extends Command
         $process = Process::fromShellCommandline("cd /var/www/{$name} && valet secure {$name}");
         $process->setTty(Process::isTtySupported());
         $process->run();
+
+        $this->notify('Site is installed and ready to rocket!');
     }
 }
