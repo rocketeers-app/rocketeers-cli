@@ -29,7 +29,7 @@ class Install extends Command
         $process->setTimeout(300);
         $process->run();
 
-        $process = new Process(['git', 'checkout', $branch]);
+        $process = Process::fromShellCommandline("cd /var/www/{$name} && git checkout {$branch}");
         $process->setTty(Process::isTtySupported());
         $process->run();
 
@@ -67,6 +67,6 @@ class Install extends Command
         $process->setTimeout(300);
         $process->run();
 
-        $this->notify('Site is installed and ready to rocket!');
+        // $this->notify('Site is installed and ready to rocket!');
     }
 }
