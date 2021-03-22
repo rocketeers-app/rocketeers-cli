@@ -24,6 +24,7 @@ class Install extends Command
 
         $process = new Process(['git', 'clone', $url, '/var/www/'.$name]);
         $process->setTty(Process::isTtySupported());
+        $process->setTimeout(300);
         $process->run();
 
         $env = (new GetEnv)($site, $server);
@@ -42,18 +43,22 @@ class Install extends Command
 
         $process = Process::fromShellCommandline("cd /var/www/{$name} && composer install");
         $process->setTty(Process::isTtySupported());
+        $process->setTimeout(300);
         $process->run();
 
         $process = Process::fromShellCommandline("cd /var/www/{$name} && php artisan migrate --force");
         $process->setTty(Process::isTtySupported());
+        $process->setTimeout(300);
         $process->run();
 
         $process = Process::fromShellCommandline("cd /var/www/{$name} && npm install && npm run dev");
         $process->setTty(Process::isTtySupported());
+        $process->setTimeout(300);
         $process->run();
 
         $process = Process::fromShellCommandline("cd /var/www/{$name} && valet secure {$name}");
         $process->setTty(Process::isTtySupported());
+        $process->setTimeout(300);
         $process->run();
 
         $this->notify('Site is installed and ready to rocket!');
