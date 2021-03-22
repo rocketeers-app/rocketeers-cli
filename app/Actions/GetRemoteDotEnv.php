@@ -5,7 +5,7 @@ namespace App\Actions;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Spatie\Ssh\Ssh;
 
-class GetEnv
+class GetRemoteDotEnv
 {
     use AsAction;
 
