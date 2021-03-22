@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Actions\GetCurrentBranch;
 use App\Actions\GetEnv;
 use App\Actions\GetRepositoryName;
 use App\Actions\GetRepositoryUrl;
@@ -21,10 +22,15 @@ class Install extends Command
 
         $url = (new GetRepositoryUrl)($site, $server);
         $name = (new GetRepositoryName)($site, $server);
+        $branch = (new GetCurrentBranch)($site, $server);
 
         $process = new Process(['git', 'clone', $url, '/var/www/'.$name]);
         $process->setTty(Process::isTtySupported());
         $process->setTimeout(300);
+        $process->run();
+
+        $process = new Process(['git', 'checkout', $branch]);
+        $process->setTty(Process::isTtySupported());
         $process->run();
 
         $env = (new GetEnv)($site, $server);
