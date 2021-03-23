@@ -11,7 +11,7 @@ use Illuminate\Console\Command;
 class PullEnv extends Command
 {
     protected $signature = 'env:pull {site} {--server=}';
-    protected $description = 'Tail logs from sites';
+    protected $description = 'Pull env for site from remote server';
 
     public function handle()
     {
