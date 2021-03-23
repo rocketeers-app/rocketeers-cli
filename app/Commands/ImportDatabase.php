@@ -16,5 +16,7 @@ class ImportDatabase extends Command
         $server = $this->option('server') ?? $site;
 
         (new ImportRemoteDatabase)($site, $server);
+
+        $this->info('Database is imported for '.$site);
     }
 }

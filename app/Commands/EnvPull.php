@@ -8,7 +8,7 @@ use App\Actions\GetRepositoryName;
 use App\Actions\PutEnvLocally;
 use Illuminate\Console\Command;
 
-class PullEnv extends Command
+class EnvPull extends Command
 {
     protected $signature = 'env:pull {site} {--server=}';
     protected $description = 'Pull env for site from remote server';
@@ -23,5 +23,7 @@ class PullEnv extends Command
         $env = (new ConfigureDotEnvLocally)($env, $name);
 
         (new PutEnvLocally)($env, $name);
+
+        $this->info('Env pulled for '.$site);
     }
 }

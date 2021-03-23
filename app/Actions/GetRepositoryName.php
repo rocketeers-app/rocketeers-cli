@@ -12,7 +12,7 @@ class GetRepositoryName
     public function handle($site, $server = null)
     {
         $process = Ssh::create('rocketeer', $server ?? $site)
-        ->execute("cd /var/www/{$site}/current && git config --get remote.origin.url");
+            ->execute("cd /var/www/{$site}/current && git config --get remote.origin.url");
 
         $url = trim($process->getOutput());
 

@@ -49,5 +49,7 @@ class Install extends Command
         (new ValetSecure)($name);
 
         (new NotifyLocally)($message);
+
+        $this->info("Site {$site} is installed.");
     }
 }
