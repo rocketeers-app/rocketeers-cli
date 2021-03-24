@@ -5,6 +5,7 @@ namespace App\Commands;
 use App\Actions\ConfigureDotEnvLocally;
 use App\Actions\GetRemoteDotEnv;
 use App\Actions\GetRepositoryName;
+use App\Actions\NotifyLocally;
 use App\Actions\PutEnvLocally;
 use Illuminate\Console\Command;
 
@@ -24,6 +25,8 @@ class EnvPull extends Command
 
         (new PutEnvLocally)($env, $name);
 
-        $this->info('Env pulled for '.$site);
+        (new NotifyLocally)([
+            'message' => "Env pulled for {$site}",
+        ]);
     }
 }

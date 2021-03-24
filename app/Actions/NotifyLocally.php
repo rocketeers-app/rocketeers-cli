@@ -11,5 +11,7 @@ class NotifyLocally
     public function handle($message)
     {
         // $this->notify($message, 'icon.png');
+
+        $this->info($message);
     }
 }

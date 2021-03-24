@@ -3,6 +3,7 @@
 namespace App\Commands;
 
 use App\Actions\ImportRemoteDatabase;
+use App\Actions\NotifyLocally;
 use Illuminate\Console\Command;
 
 class ImportDatabase extends Command
@@ -17,6 +18,8 @@ class ImportDatabase extends Command
 
         (new ImportRemoteDatabase)($site, $server);
 
-        $this->info('Database is imported for '.$site);
+        (new NotifyLocally)([
+            'message' => "Database is imported for {$site}",
+        ]);
     }
 }
