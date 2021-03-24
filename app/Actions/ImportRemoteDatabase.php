@@ -39,6 +39,8 @@ class ImportRemoteDatabase
         $process->run();
 
         $process = Process::fromShellCommandline('ssh rocketeer@'.$server.' "sudo mysqldump --user=\''.$username.'\' --password=\''.$password.'\' --no-tablespaces \''.$database.'\' | sudo gzip" | gunzip | mysql -u root --password=\'\' \''.$name.'\'');
+        $process->setTty(Process::isTtySupported());
+        $process->setTimeout(600);
         $process->run();
     }
 }
