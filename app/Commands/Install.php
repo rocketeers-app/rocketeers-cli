@@ -50,6 +50,7 @@ class Install extends Command
 
         (new NotifyLocally)([
             'message' => "Site {$site} is installed.",
+            'console' => $this,
         ]);
     }
 }

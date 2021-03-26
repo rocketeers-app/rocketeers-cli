@@ -27,6 +27,7 @@ class EnvPull extends Command
 
         (new NotifyLocally)([
             'message' => "Env pulled for {$site}",
+            'console' => $this,
         ]);
     }
 }

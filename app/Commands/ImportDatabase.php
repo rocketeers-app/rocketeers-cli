@@ -20,6 +20,7 @@ class ImportDatabase extends Command
 
         (new NotifyLocally)([
             'message' => "Database is imported for {$site}",
+            'console' => $this,
         ]);
     }
 }
