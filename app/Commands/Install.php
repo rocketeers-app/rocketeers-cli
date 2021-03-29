@@ -48,9 +48,6 @@ class Install extends Command
         (new NpmInstall)($name);
         (new ValetSecure)($name);
 
-        (new NotifyLocally)([
-            'message' => "Site {$site} is installed.",
-            'console' => $this,
-        ]);
+        (new NotifyLocally)("Site {$site} is installed.", $this);
     }
 }

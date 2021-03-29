@@ -18,9 +18,6 @@ class ImportDatabase extends Command
 
         (new ImportRemoteDatabase)($site, $server);
 
-        (new NotifyLocally)([
-            'message' => "Database is imported for {$site}",
-            'console' => $this,
-        ]);
+        (new NotifyLocally)("Database is imported for {$site}", $this);
     }
 }
