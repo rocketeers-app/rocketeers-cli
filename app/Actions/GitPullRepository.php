@@ -5,13 +5,13 @@ namespace App\Actions;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Symfony\Component\Process\Process;
 
-class NpmInstall
+class GitPullRepository
 {
     use AsAction;
 
-    public function handle($name)
+    public function handle()
     {
-        $process = Process::fromShellCommandline("cd /var/www/{$name} && npm install && npm run dev");
+        $process = new Process(['git', 'pull']);
         $process->setTty(Process::isTtySupported());
         $process->setTimeout(300);
         $process->run();
